@@ -1,7 +1,24 @@
 ---
 import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Main from "../components/Main.astro";
+import H1 from "../components/H1.astro";
 
 const posts = await getCollection("posts");
 
 console.log('posts', posts);
 ---
+
+<Layout title="Skinwalker's Blog Posts" description="Skinwalker's Blog Posts" >
+	<Main>
+		<H1 text="Skinwalker's Blog Posts" />
+    {posts.map((post) => {
+      return (
+        <a href={`/blog/${post.slug}`}>
+         
+          <h2 class="">{post.data.title}</h2>
+        </a>
+      )
+    })}
+	</Main>
+</Layout>
